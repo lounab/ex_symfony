@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MissionController!{% endblock %}
+
+{% block body %}
+<div class="example-wrapper">
+    <h1>Mission dashboard ✅</h1>
+    <button><a href="{{ path('missions_list') }}">Back to missions list</a></button>
+
+    <h3>Your missions {{ mission.name }}:</h3>
+    <p>
+        Description : {{ mission.description }}<br/>
+        Priority :
+        {% if mission.priority == 0 %}
+            weak
+        {% elseif mission.priority == 1 %}
+            medium
+        {% elseif mission.priority == 2 %}
+            difficult
+        {% endif %}
+        <br/>
+        Date : {{ "now"|date("m/d/Y") }}<br/>
+        Statut :
+        {% if mission.statut == 0 %}
+            to do
+        {% elseif mission.statut == 1 %}
+            in progress
+        {% elseif mission.statut == 2 %}
+            done
+        {% endif %}<br/>
+        Heroes : {{ mission.heroes }}
+    </p>
+
+    <button><a href="{{ path('delete_mission', {'id': mission.id}) }}">Delete</a></button>
+    <button><a href="{{ path('update_mission', {'id': mission.id}) }}">Update</a></button>
+
+</div>
+
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+{% endblock %}
